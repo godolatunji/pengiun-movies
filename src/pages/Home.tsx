@@ -9,7 +9,7 @@ function Home() {
   const popularQuery = api.GetPopular();
   const nowPlayingQuery = api.GetNowPlaying();
   const trendingQuery = api.GetTrending();
-  const upcomingQuery = api.GetTrending();
+  const upcomingQuery = api.GetUpcoming();
   const topratedQuery = api.GetToprated();
 
   if (originalQuery.isLoading) return <Loader />;
@@ -30,16 +30,24 @@ function Home() {
   return (
     <div>
       {trendingQuery.isSuccess ? <Hero movie={movie} /> : <Loader />};
-      {originalQuery.isSuccess && <MoviesList title="Shows" movies={originals} />}
-      {popularQuery.isSuccess && <MoviesList title="popular" movies={popular} />}
+      {originalQuery.isSuccess && (
+        <MoviesList title="Shows" movies={originals} />
+      )}
+      {popularQuery.isSuccess && (
+        <MoviesList title="popular" movies={popular} />
+      )}
       {topratedQuery.isSuccess && (
         <MoviesList title="top rated" movies={toprated} />
       )}
-      {trendingQuery.isSuccess && <MoviesList title="trending" movies={trending} />}
+      {trendingQuery.isSuccess && (
+        <MoviesList title="trending" movies={trending} />
+      )}
       {nowPlaying.isSuccess && (
         <MoviesList title="Now Playing" movies={nowPlaying} />
       )}
-      {upcomingQuery.isSuccess && <MoviesList title="upcoming" movies={upcoming} />}
+      {upcomingQuery.isSuccess && (
+        <MoviesList title="upcoming" movies={upcoming} />
+      )}
     </div>
   );
 }

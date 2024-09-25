@@ -31,8 +31,8 @@ function MoviesList({
                 style={style}
                 onClick={() =>
                   movie.release_date
-                    ? window.location.href(`/movies/${movie.id}`)
-                    : window.location.href(`/shows/${movie.id}`)
+                    ? (window.location.href = `/movies/${movie.id}`)
+                    : (window.location.href = `/shows/${movie.id}`)
                 }
               >
                 <MoviePoster

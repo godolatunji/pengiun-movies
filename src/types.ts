@@ -3,7 +3,7 @@ export interface IMovie {
   backdrop_path?: string;
   genre_ids?: number[];
   id: number;
-  origin_country?: string[];
+  origin_country: string[];
   original_language?: string;
   original_title?: string;
   original_name?: string;
@@ -12,18 +12,18 @@ export interface IMovie {
   poster_path?: string;
   release_date?: string;
   title?: string;
-  name?: string;
+  name: string;
   video?: string;
   vote_count?: number;
   vote_average?: number;
   revenue?: number;
   first_air_date?: string;
   homepage?: string;
-  genres?: string[];
   status?: boolean;
   tagline?: string;
-  production_companies?: Array<Record<string, number | string>>;
-  belongs_to_collection?: Record<string, number | string>;
+  production_companies: Irecord[];
+  belongs_to_collection: Irecord;
+  genres: Irecord[];
   budget?: number;
   runtime?: number;
   imdb_id?: string;
@@ -53,18 +53,23 @@ export interface IShow {
   video?: string;
   vote_count?: number;
   vote_average?: number;
-  revenue?: number;
   first_air_date?: string;
   homepage?: string;
-  genres?: string[];
   status?: boolean;
   tagline?: string;
-  production_companies?: Array<Record<string, number | string>>;
-  next_episode_to_air?: Record<string, number | string>;
-  belongs_to_collection?: Record<string, number | string>;
+  production_companies: Irecord[];
+  belongs_to_collection: Irecord;
+  genres: Irecord[];
+  next_episode_to_air: Irecord;
   budget?: number;
   runtime?: number;
   imdb_id?: string;
+  type?: string;
   last_air_date?: string;
   number_of_episodes?: number;
+  number_of_seasons?: number;
+}
+
+export interface Irecord {
+  [key: string]: string | number | boolean | undefined;
 }

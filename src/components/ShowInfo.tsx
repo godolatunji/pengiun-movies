@@ -4,7 +4,7 @@ import { IShow } from "../types";
 export const ShowInfo = ({ show }: { show: IShow }) => {
   const genres = show.genres.map((g) => {
     return (
-      <li key={g.id} className="flex">
+      <li key={Number(g.id)} className="flex">
         <span className="mr-1">
           <svg
             className="w-5 h-5 mt-px text-deep-purple-accent-400"
@@ -117,7 +117,7 @@ export const ShowInfo = ({ show }: { show: IShow }) => {
               <img
                 className=" w-auto h-full rounded shadow-lg sm:h-96 ml-auto mr-auto"
                 src={`https://image.tmdb.org/t/p/w300${show.belongs_to_collection.poster_path}`}
-                alt={show.name}
+                alt={String(show.belongs_to_collection.name)}
               />
             </>
           )}
@@ -225,7 +225,7 @@ export const ShowInfo = ({ show }: { show: IShow }) => {
             {show.production_companies.length > 0 &&
               show.production_companies.map((p) => {
                 return (
-                  <p key={p.id} className="text-sm text-gray-900">
+                  <p key={Number(p.id)} className="text-sm text-gray-900">
                     <span className="text-black font-bold text-indigo-950">
                       Company:{" "}
                     </span>

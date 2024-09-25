@@ -1,6 +1,6 @@
-import { IMovie } from "../types";
+import { IMovie, IShow } from "../types";
 
-export default function Hero({ movie }: { movie: IMovie }) {
+export default function Hero({ movie }: { movie: IMovie | IShow }) {
   const backgroundImage = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     : "https://placehold.jp/3d4070/ffffff/150x150.jpg?text=hello";

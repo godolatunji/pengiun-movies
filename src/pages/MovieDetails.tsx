@@ -8,9 +8,10 @@ import Loader from "../components/Loader";
 
 function MovieDetails() {
   const { id } = useParams();
+  const idd = parseInt(String(id));
 
-  const query = api.GetMovieDetails(id);
-  const similarQ = api.GetSimilarMovies(id);
+  const query = api.GetMovieDetails(idd);
+  const similarQ = api.GetSimilarMovies(idd);
 
   if (query.isLoading) return <Loader />;
   if (query.error) return "An error has occurred: " + query.error.message;

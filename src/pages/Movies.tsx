@@ -10,14 +10,14 @@ export default function Movies() {
   };
 
   const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   useEffect(() => {
     setIsFetching(true);
     const fetch = async () => {
       const query = await api.GetDiscoverMovie(page);
-      setMovies([...movies, ...query.results]);
+      setMovies((m: IMovie[]) => [...m, ...query.results]);
     };
     fetch();
     setIsFetching(false);
@@ -39,7 +39,7 @@ export default function Movies() {
                   to={`/movies/${movie.id}`}
                   className=""
                   style={style}
-                  onClick={() => window.location.href(`/movies/${movie.id}`)}
+                  onClick={() => (window.location.href = `/movies/${movie.id}`)}
                 >
                   <MoviePoster
                     src={

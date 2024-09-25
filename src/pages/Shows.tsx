@@ -10,14 +10,14 @@ export default function Shows() {
   };
 
   const [page, setPage] = useState(1);
-  const [shows, setShows] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const [shows, setShows] = useState<IShow[]>([]);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   useEffect(() => {
     const fetch = async () => {
       setIsFetching(true);
       const query = await api.GetDiscoverShow(page);
-      setShows([...shows, ...query.results]);
+      setShows((shs: IShow[]) => [...shs, ...query.results]);
       setIsFetching(false);
     };
     fetch();
@@ -39,7 +39,7 @@ export default function Shows() {
                   to={`/shows/${show.id}`}
                   className=""
                   style={style}
-                  onClick={() => window.location.href(`/shows/${show.id}`)}
+                  onClick={() => (window.location.href = `/shows/${show.id}`)}
                 >
                   <MoviePoster
                     src={

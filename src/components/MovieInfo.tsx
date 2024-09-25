@@ -11,7 +11,7 @@ function currencyFormat(num: number | undefined): string {
 export const MovieInfo = ({ movie }: { movie: IMovie }) => {
   const genres = movie.genres.map((g) => {
     return (
-      <li key={g.id} className="flex">
+      <li key={Number(g.id)} className="flex">
         <span className="mr-1">
           <svg
             className="w-5 h-5 mt-px text-deep-purple-accent-400"
@@ -230,7 +230,7 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
             {movie.production_companies.length > 0 &&
               movie.production_companies.map((p) => {
                 return (
-                  <p key={p.id} className="text-sm text-gray-900">
+                  <p key={Number(p.id)} className="text-sm text-gray-900">
                     <span className="text-black font-bold text-indigo-950">
                       Company:{" "}
                     </span>
