@@ -1,7 +1,7 @@
 import Hero from "../components/Hero";
 import * as api from "../lib/api";
 import { IMovie } from "../types";
-import Movies from "../components/Movies";
+import MoviesList from "../components/MoviesList";
 import Loader from "../components/Loader";
 
 function Home() {
@@ -16,24 +16,30 @@ function Home() {
   if (originalQuery.error)
     return "An error has occurred: " + originalQuery.error.message;
 
-  const originals = originalQuery.data.results;
-  const popular = popularQuery.data.results;
-  const nowPlaying = nowPlayingQuery.data.results;
-  const trending = trendingQuery.data.results;
-  const upcoming = upcomingQuery.data.results;
-  const toprated = topratedQuery.data.results;
+  const originals = originalQuery.isSuccess ? originalQuery.data.results : [];
+  const popular = popularQuery.isSuccess ? popularQuery.data.results : [];
+  const nowPlaying = nowPlayingQuery.isSuccess
+    ? nowPlayingQuery.data.results
+    : [];
+  const trending = trendingQuery.isSuccess ? trendingQuery.data.results : [];
+  const upcoming = upcomingQuery.isSuccess ? upcomingQuery.data.results : [];
+  const toprated = topratedQuery.isSuccess ? topratedQuery.data.results : [];
 
-  const movie: IMovie = trending[Math.floor(Math.random() * originals.length)];
+  const movie: IMovie = trending[Math.floor(Math.random() * trending.length)];
 
   return (
     <div>
-      <Hero movie={movie} />;
-      <Movies title="Discover" movies={originals} />
-      <Movies title="popular" movies={popular} />
-      <Movies title="top rated" movies={toprated} />
-      <Movies title="trending" movies={trending} />
-      <Movies title="Now Playing" movies={nowPlaying} />
-      <Movies title="upcoming" movies={upcoming} />
+      {trendingQuery.isSuccess ? <Hero movie={movie} /> : <Loader />};
+      {originalQuery.isSuccess && <MoviesList title="Shows" movies={originals} />}
+      {popularQuery.isSuccess && <MoviesList title="popular" movies={popular} />}
+      {topratedQuery.isSuccess && (
+        <MoviesList title="top rated" movies={toprated} />
+      )}
+      {trendingQuery.isSuccess && <MoviesList title="trending" movies={trending} />}
+      {nowPlaying.isSuccess && (
+        <MoviesList title="Now Playing" movies={nowPlaying} />
+      )}
+      {upcomingQuery.isSuccess && <MoviesList title="upcoming" movies={upcoming} />}
     </div>
   );
 }

@@ -3,11 +3,13 @@ import * as api from "../lib/api";
 import Hero from "../components/Hero";
 import { IMovie } from "../types";
 import { MovieInfo } from "../components/MovieInfo";
-import Movies from "../components/Movies";
+import Movies from "../components/MoviesList";
 import Loader from "../components/Loader";
+import { useEffect, useState } from "react";
 
 function MovieDetails() {
   const { id } = useParams();
+  // const [mId, setMId] = useState();
 
   const query = api.GetMovieDetails(id);
   const similarQ = api.GetSimilarMovies(id);
@@ -15,14 +17,14 @@ function MovieDetails() {
   if (query.isLoading) return <Loader />;
   if (query.error) return "An error has occurred: " + query.error.message;
 
-  const movie: IMovie = query.data;
-  const similar = similarQ.data.results;
+  const movie: IMovie = query.isSuccess ? query.data : {};
+  const similar = similarQ.isSuccess ? similarQ.data.results : [];
 
   return (
     <div>
       <Hero movie={movie} />
-      <MovieInfo movie={movie} />
-      <Movies title="similar movies" movies={similar} />
+      {query.isSuccess && <MovieInfo movie={movie} />}
+      {similarQ.isSuccess && <Movies title="similar movies" movies={similar} />}
     </div>
   );
 }

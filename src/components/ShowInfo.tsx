@@ -1,15 +1,8 @@
 import { Link } from "react-router-dom";
-import { IMovie } from "../types";
+import { IShow } from "../types";
 
-function currencyFormat(num: number | undefined): string {
-  if (num === undefined) {
-    return "$0.00";
-  }
-  return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-}
-
-export const MovieInfo = ({ movie }: { movie: IMovie }) => {
-  const genres = movie.genres.map((g) => {
+export const ShowInfo = ({ show }: { show: IShow }) => {
+  const genres = show.genres.map((g) => {
     return (
       <li key={g.id} className="flex">
         <span className="mr-1">
@@ -42,9 +35,9 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="lg:pr-10">
           <h5 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-            {movie.title}
+            {show.title}
           </h5>
-          <p className="mb-6 text-gray-900">{movie.overview}</p>
+          <p className="mb-6 text-gray-900">{show.overview}</p>
           <hr className="mb-5 border-gray-300" />
           <div className="flex items-center space-x-4">
             <p className="mb-4 text-sm font-bold tracking-widest uppercase">
@@ -58,8 +51,8 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
         <div className="lg:pl-30 sm:pl-20 sm:ml-10">
           <img
             className=" w-auto h-full rounded shadow-lg sm:h-96"
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-            alt={movie.name}
+            src={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
+            alt={show.name}
           />
         </div>
       </div>
@@ -67,10 +60,10 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
         <div className="mb-10 text-center md:mb-16 lg:mb-20">
           <a
             target="_blank"
-            href={movie.homepage}
+            href={show.homepage}
             className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
           >
-            Go to movie homepage
+            Go to show homepage
           </a>
         </div>
       </div>
@@ -78,7 +71,7 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
         <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
           <div>
             <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-              {movie.status}
+              {show.status}
             </p>
           </div>
           <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
@@ -106,17 +99,18 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
                 />
               </svg>
             </span>{" "}
-            {movie.tagline}
+            {show.tagline}<br/>
+            {show.type}
           </h2>
-          {movie.belongs_to_collection && (
+          {show.belongs_to_collection && (
             <>
               <p className="text-base text-gray-700 md:text-lg">
-                {movie.belongs_to_collection.name}
+                {show.belongs_to_collection.name}
               </p>
               <img
                 className=" w-auto h-full rounded shadow-lg sm:h-96 ml-auto mr-auto"
-                src={`https://image.tmdb.org/t/p/w300${movie.belongs_to_collection.poster_path}`}
-                alt={movie.name}
+                src={`https://image.tmdb.org/t/p/w300${show.belongs_to_collection.poster_path}`}
+                alt={show.name}
               />
             </>
           )}
@@ -138,10 +132,8 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
                 />
               </svg>
             </div>
-            <h6 className="mb-2 font-semibold leading-5">Revenue</h6>
-            <p className="text-sm text-gray-900">
-              {currencyFormat(movie.revenue)}
-            </p>
+            <h6 className="mb-2 font-semibold leading-5">Seasons</h6>
+            <p className="text-sm text-gray-900">{show.number_of_seasons}</p>
           </div>
           <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-indigo-50">
@@ -159,8 +151,10 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
                 />
               </svg>
             </div>
-            <h6 className="mb-2 font-semibold leading-5">Runtime</h6>
-            <p className="text-sm text-gray-900">{movie.runtime} minutes</p>
+            <h6 className="mb-2 font-semibold leading-5">
+              First Episode Air Date
+            </h6>
+            <p className="text-sm text-gray-900">{show.first_air_date}</p>
           </div>
           <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-indigo-50">
@@ -178,10 +172,10 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
                 />
               </svg>
             </div>
-            <h6 className="mb-2 font-semibold leading-5">Budget</h6>
-            <p className="text-sm text-gray-900">
-              {currencyFormat(movie.budget)}
-            </p>
+            <h6 className="mb-2 font-semibold leading-5">
+              Last Episode Air Date
+            </h6>
+            <p className="text-sm text-gray-900">{show.last_air_date}</p>
           </div>
           <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-indigo-50">
@@ -199,8 +193,8 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
                 />
               </svg>
             </div>
-            <h6 className="mb-2 font-semibold leading-5">Release Date</h6>
-            <p className="text-sm text-gray-900">{movie.release_date}</p>
+            <h6 className="mb-2 font-semibold leading-5">Episodes</h6>
+            <p className="text-sm text-gray-900">{show.number_of_episodes}</p>
           </div>
           <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-indigo-50">
@@ -221,8 +215,8 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
             <h6 className="mb-2 font-semibold leading-5">
               Production Companies
             </h6>
-            {movie.production_companies.length > 0 &&
-              movie.production_companies.map((p) => {
+            {show.production_companies.length > 0 &&
+              show.production_companies.map((p) => {
                 return (
                   <p key={p.id} className="text-sm text-gray-900">
                     <span className="text-black font-bold text-indigo-950">
@@ -250,16 +244,16 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
               </svg>
             </div>
             <h6 className="mb-2 font-semibold leading-5">Vote Average</h6>
-            <p className="text-sm text-gray-900">{movie.vote_average}</p>
+            <p className="text-sm text-gray-900">{show.vote_average}</p>
           </div>
         </div>
         <div className="text-center">
           <a
             target="_blank"
-            href={`https://www.imdb.com/title/${movie.imdb_id}`}
+            href={`https://www.imdb.com/title/${show.imdb_id}`}
             className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
           >
-            Go to movie page on IMDB
+            Go to show page on IMDB
           </a>
         </div>
       </div>

@@ -3,6 +3,9 @@ import Home from "./pages/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/Layout";
 import MovieDetails from "./pages/MovieDetails";
+import ShowDetails from "./pages/ShowDetails";
+import Movies from "./pages/Movies";
+import Shows from "./pages/Shows";
 
 const queryClient = new QueryClient();
 
@@ -12,7 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {/* <Route path="/movies" element={<Movies />} /> */}
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/shows/" element={<Shows />} />
+          <Route path="/shows/:id" element={<ShowDetails />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
         </Route>
       </Routes>

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 
 const URL = "https://api.themoviedb.org/3";
 const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
-  
 
 const options: RequestInit = {
   method: "GET",
@@ -13,12 +12,13 @@ const options: RequestInit = {
 };
 
 const endpoints = {
-  originals: "/discover/movie",
+  originals: "/discover/tv",
   popular: "/movie/popular",
   now_playing: "/movie/now_playing",
   trending: "/trending/all/week",
   top_rated: "/movie/top_rated",
   upcoming: "/movie/upcoming",
+  discoverMovie: "/discover/movie",
 };
 
 export function GetOriginals() {
@@ -39,6 +39,22 @@ export function GetPopular() {
       return await resp.json();
     },
   });
+}
+
+export async function GetDiscoverMovie(page: number) {
+  const resp = await fetch(
+    `${URL}${endpoints.discoverMovie}?page=${page}`,
+    options
+  );
+  return await resp.json();
+}
+
+export async function GetDiscoverShow(page: number) {
+  const resp = await fetch(
+    `${URL}${endpoints.originals}?page=${page}`,
+    options
+  );
+  return await resp.json();
 }
 
 export function GetNowPlaying() {
@@ -96,6 +112,26 @@ export function GetSimilarMovies(id: number) {
     queryKey: ["similar_movies"],
     queryFn: async () => {
       const resp = await fetch(`${URL}/movie/${id}/similar`, options);
+      return await resp.json();
+    },
+  });
+}
+
+export function GetShowDetails(id: number) {
+  return useQuery({
+    queryKey: ["show_details"],
+    queryFn: async () => {
+      const resp = await fetch(`${URL}/tv/${id}`, options);
+      return await resp.json();
+    },
+  });
+}
+
+export function GetSimilarShows(id: number) {
+  return useQuery({
+    queryKey: ["similar_shows"],
+    queryFn: async () => {
+      const resp = await fetch(`${URL}/tv/${id}/similar`, options);
       return await resp.json();
     },
   });
