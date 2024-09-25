@@ -14,13 +14,13 @@ export default function Shows() {
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    setIsFetching(true);
     const fetch = async () => {
+      setIsFetching(true);
       const query = await api.GetDiscoverShow(page);
       setShows([...shows, ...query.results]);
+      setIsFetching(false);
     };
     fetch();
-    setIsFetching(false);
   }, [page]);
 
   function loadMore() {
@@ -35,14 +35,20 @@ export default function Shows() {
             shows.map((show: IShow) => {
               return (
                 <Link
-                  key={shows.id}
+                  key={show.id}
                   to={`/shows/${show.id}`}
                   className=""
                   style={style}
                   onClick={() => window.location.href(`/shows/${show.id}`)}
                 >
                   <MoviePoster
-                    src={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
+                    src={
+                      show.poster_path
+                        ? `https://image.tmdb.org/t/p/w300${show.poster_path}`
+                        : `https://placehold.co/300x450?text=${show.name
+                            ?.split(" ")
+                            .join("+")}`
+                    }
                     alt={show.name}
                   />
                 </Link>

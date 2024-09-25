@@ -42,7 +42,13 @@ export default function Movies() {
                   onClick={() => window.location.href(`/movies/${movie.id}`)}
                 >
                   <MoviePoster
-                    src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                        : `https://placehold.co/300x450?text=${movie.name
+                            .split(" ")
+                            .join("+")}`
+                    }
                     alt={movie.name}
                   />
                 </Link>

@@ -17,7 +17,10 @@ export default function Hero({ movie }: { movie: IMovie }) {
       <h1 className="text-gray-100 text-5xl font-bold mb-4 text-shadow-3 mt-[40vh]">
         {movie.name || movie.title}
       </h1>
-      <p style={dStyle} className="text-gray-100 font-light text-lg mb-4">
+      <p
+        style={dStyle}
+        className="text-gray-100 font-light text-lg mb-4 heroText"
+      >
         {movie.overview}
       </p>
     </div>
