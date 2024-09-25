@@ -37,7 +37,14 @@ function MoviesList({
               >
                 <MoviePoster
                   key={movie.id}
-                  src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                      : `https://placehold.co/300x450?text=${
+                          movie.name ||
+                          movie.original_title?.split(" ").join("+")
+                        }`
+                  }
                   alt={movie.name}
                 />
               </Link>

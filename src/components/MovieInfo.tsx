@@ -58,8 +58,14 @@ export const MovieInfo = ({ movie }: { movie: IMovie }) => {
         <div className="lg:pl-30 sm:pl-20 sm:ml-10">
           <img
             className=" w-auto h-full rounded shadow-lg sm:h-96"
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-            alt={movie.name}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                : `https://placehold.co/300x450?text=${
+                    movie.name || movie.original_title?.split(" ").join("+")
+                  }`
+            }
+            alt={movie.original_title || movie.name}
           />
         </div>
       </div>

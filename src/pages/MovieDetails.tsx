@@ -5,11 +5,9 @@ import { IMovie } from "../types";
 import { MovieInfo } from "../components/MovieInfo";
 import Movies from "../components/MoviesList";
 import Loader from "../components/Loader";
-import { useEffect, useState } from "react";
 
 function MovieDetails() {
   const { id } = useParams();
-  // const [mId, setMId] = useState();
 
   const query = api.GetMovieDetails(id);
   const similarQ = api.GetSimilarMovies(id);
@@ -22,7 +20,7 @@ function MovieDetails() {
 
   return (
     <div>
-      <Hero movie={movie} />
+      {query.isSuccess && <Hero movie={movie} />}
       {query.isSuccess && <MovieInfo movie={movie} />}
       {similarQ.isSuccess && <Movies title="similar movies" movies={similar} />}
     </div>

@@ -51,7 +51,13 @@ export const ShowInfo = ({ show }: { show: IShow }) => {
         <div className="lg:pl-30 sm:pl-20 sm:ml-10">
           <img
             className=" w-auto h-full rounded shadow-lg sm:h-96"
-            src={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
+            src={
+              show.poster_path
+                ? `https://image.tmdb.org/t/p/w300${show.poster_path}`
+                : `https://placehold.co/300x450?text=${show.name
+                    ?.split(" ")
+                    .join("+")}`
+            }
             alt={show.name}
           />
         </div>
@@ -99,7 +105,8 @@ export const ShowInfo = ({ show }: { show: IShow }) => {
                 />
               </svg>
             </span>{" "}
-            {show.tagline}<br/>
+            {show.tagline}
+            <br />
             {show.type}
           </h2>
           {show.belongs_to_collection && (
