@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MoviePoster from "../components/MoviePoster";
 import { IShow } from "../types";
 import * as api from "../lib/api";
@@ -13,10 +13,17 @@ export default function Shows() {
   const [shows, setShows] = useState<IShow[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
+  const location = useLocation();
+  const genre = parseInt(
+    String(new URLSearchParams(location.search).get("genre"))
+  );
+
   useEffect(() => {
     const fetch = async () => {
       setIsFetching(true);
-      const query = await api.GetDiscoverShow(page);
+      const query = await (!isNaN(genre)
+        ? api.GetDiscoverShow(page, genre)
+        : api.GetDiscoverShow(page));
       setShows((shs: IShow[]) => [...shs, ...query.results]);
       setIsFetching(false);
     };
@@ -59,7 +66,8 @@ export default function Shows() {
       <div className="flex flex-row justify-center">
         <button
           onClick={() => loadMore()}
-          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+          disabled={isFetching}
+          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none disabled:bg-gray-500"
         >
           {isFetching ? "Loading..." : "Load More"}
         </button>

@@ -21,9 +21,9 @@ export const NavBar = () => {
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
               <a
-                href="/#"
-                aria-label="Our product"
-                title="Our product"
+                href="/genres"
+                aria-label="Genres"
+                title="Genres"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Genres
@@ -32,8 +32,8 @@ export const NavBar = () => {
             <li>
               <a
                 href="/movies"
-                aria-label="Our product"
-                title="Our product"
+                aria-label="Movies"
+                title="Movies"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Movies
@@ -42,21 +42,11 @@ export const NavBar = () => {
             <li>
               <a
                 href="/shows"
-                aria-label="Product pricing"
-                title="Product pricing"
+                aria-label="Shows"
+                title="Shows"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Shows
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                aria-label="About us"
-                title="About us"
-                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Trending
               </a>
             </li>
           </ul>
@@ -65,8 +55,8 @@ export const NavBar = () => {
               <a
                 href="#"
                 className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Sign up"
-                title="Sign up"
+                aria-label="Search"
+                title="Search"
               >
                 Search
               </a>
@@ -136,8 +126,8 @@ export const NavBar = () => {
                       <li>
                         <a
                           href="/genres"
-                          aria-label="Our product"
-                          title="Our product"
+                          aria-label="Genres"
+                          title="Genres"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Genres
@@ -146,8 +136,8 @@ export const NavBar = () => {
                       <li>
                         <a
                           href="/movies"
-                          aria-label="Our product"
-                          title="Our product"
+                          aria-label="Movies"
+                          title="Movies"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Movies
@@ -155,9 +145,9 @@ export const NavBar = () => {
                       </li>
                       <li>
                         <a
-                          href="/"
-                          aria-label="Product pricing"
-                          title="Product pricing"
+                          href="/shows"
+                          aria-label="Shows"
+                          title="Shows"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Shows
@@ -166,19 +156,9 @@ export const NavBar = () => {
                       <li>
                         <a
                           href="/#"
-                          aria-label="About us"
-                          title="About us"
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          Trending
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="/#"
                           className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Sign up"
-                          title="Sign up"
+                          aria-label="Search"
+                          title="Search"
                         >
                           Search
                         </a>

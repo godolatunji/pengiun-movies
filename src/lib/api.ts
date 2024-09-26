@@ -41,19 +41,19 @@ export function GetPopular() {
   });
 }
 
-export async function GetDiscoverMovie(page: number) {
-  const resp = await fetch(
-    `${URL}${endpoints.discoverMovie}?page=${page}`,
-    options
-  );
+export async function GetDiscoverMovie(page: number, genre?: number) {
+  const url = genre
+    ? `${URL}${endpoints.discoverMovie}?page=${page}&with_genres=${genre}`
+    : `${URL}${endpoints.discoverMovie}?page=${page}`;
+  const resp = await fetch(url, options);
   return await resp.json();
 }
 
-export async function GetDiscoverShow(page: number) {
-  const resp = await fetch(
-    `${URL}${endpoints.originals}?page=${page}`,
-    options
-  );
+export async function GetDiscoverShow(page: number, genre?: number) {
+  const url = genre
+    ? `${URL}${endpoints.originals}?page=${page}&with_genres=${genre}`
+    : `${URL}${endpoints.originals}?page=${page}`;
+  const resp = await fetch(url, options);
   return await resp.json();
 }
 
@@ -132,6 +132,26 @@ export function GetSimilarShows(id: number) {
     queryKey: ["similar_shows"],
     queryFn: async () => {
       const resp = await fetch(`${URL}/tv/${id}/similar`, options);
+      return await resp.json();
+    },
+  });
+}
+
+export function GetMovieGenres() {
+  return useQuery({
+    queryKey: ["movie_genres"],
+    queryFn: async () => {
+      const resp = await fetch(`${URL}/genre/movie/list`, options);
+      return await resp.json();
+    },
+  });
+}
+
+export function GetShowGenres() {
+  return useQuery({
+    queryKey: ["show_genres"],
+    queryFn: async () => {
+      const resp = await fetch(`${URL}/genre/tv/list`, options);
       return await resp.json();
     },
   });

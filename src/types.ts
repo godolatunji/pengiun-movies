@@ -73,3 +73,8 @@ export interface IShow {
 export interface Irecord {
   [key: string]: string | number | boolean | undefined;
 }
+
+export interface IGenre {
+  id: number;
+  name: string;
+}
