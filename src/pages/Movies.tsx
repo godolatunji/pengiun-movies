@@ -25,9 +25,9 @@ export default function Movies() {
         ? api.GetDiscoverMovie(page, genre)
         : api.GetDiscoverMovie(page));
       setMovies((m: IMovie[]) => [...m, ...query.results]);
+      setIsFetching(false);
     };
     fetch();
-    setIsFetching(false);
   }, [page]);
 
   function loadMore() {
