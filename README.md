@@ -4,6 +4,12 @@ This app is my attempt to get familiar with React + TypeScript + Vite. It tries 
 
 This is still a work in progress.
 
+## Screenshots
+
+![Hero Section](./screenshots/homepage.png)
+
+![Movie List](./screenshots/movielist.png)
+
 ## Requirements
 
 A free TMD API TOKEN is required for this application. One can be gotten from https://developer.themoviedb.org.
